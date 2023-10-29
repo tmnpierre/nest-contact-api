@@ -1,5 +1,6 @@
 import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
 import { Contact } from './contact.entity';
+import { nanoid } from 'nanoid';
 
 @Injectable()
 export class ContactsService {
@@ -22,7 +23,10 @@ export class ContactsService {
       throw new ConflictException('Ce contact existe déjà.');
     }
 
-    this.contacts.push(contactData);
+    const uniqueId = nanoid(); 
+    const contactWithId = { ...contactData, id: uniqueId }; 
+
+    this.contacts.push(contactWithId);
   }
 
   getContacts() {

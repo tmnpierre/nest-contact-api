@@ -14,7 +14,7 @@ export class ContactsController {
   @HttpCode(HttpStatus.CREATED) 
   createContact(@Body() contactData: Contact, @Res() response) {
     const createdContact = this.contactsService.createContact(contactData);
-    const responseData = { status: 'created', ...createdContact }; // Ajoutez la clé "statut"
+    const responseData = { status: 'created', ...createdContact }; 
     response.status(HttpStatus.CREATED).json(responseData);
   }
 

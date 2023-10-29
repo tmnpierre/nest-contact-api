@@ -23,10 +23,13 @@ export class ContactsService {
       throw new ConflictException('Ce contact existe déjà.');
     }
 
-    const uniqueId = nanoid(); 
-    const contactWithId = { ...contactData, id: uniqueId }; 
-
+    const uniqueId = nanoid();
+    const contactWithId = { ...contactData, id: uniqueId };
     this.contacts.push(contactWithId);
+
+    console.log('Statut (ID) généré :', uniqueId);
+
+    return contactWithId;
   }
 
   getContacts() {

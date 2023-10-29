@@ -1,8 +1,11 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body } from '@nestjs/common';
 import { ContactsService } from './contacts.service';
 import { Contact } from './contact.entity';
 
-@Controller('v1/contacts')
+@Controller({
+  version: '1',
+  path: 'contacts'
+})
 export class ContactsController {
   constructor(private readonly contactsService: ContactsService) {}
 
@@ -14,5 +17,10 @@ export class ContactsController {
   @Get()
   getContacts() {
     return this.contactsService.getContacts();
+  }
+
+  @Get(':email')
+  getContactByEmail(@Param('email') email: string) {
+    return this.contactsService.getContactByEmail(email);
   }
 }
